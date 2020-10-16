@@ -4,6 +4,10 @@ type Category {
   products: [Product]
 }
 
+input FilterCategory {
+  name: String
+}
+
 type Product {
   id: ID
   name: String!
@@ -13,12 +17,18 @@ type Product {
   category: Category
 }
 
+input FilterProduct {
+  name: String
+  categoryId: String
+}
+
 type Query {
-  products: [Product]
+  products(filter: FilterProduct): [Product]
   product(id: ID!): Product
-  categories: [Category]
+  categories(filter: FilterCategory): [Category]
   category(id: ID!): Category
 }
+
 type Mutation {
   addProduct(name: String!, price: Float!, description: String, image: String, categoryId: String): Product
   addCategory(name: String!): Category

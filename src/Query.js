@@ -2,18 +2,29 @@ const { Product } = require('./models/Product')
 const { Category } = require('./models/Category')
 
 const Query = {
-  products: () => Product.find({}, (error, products) => {
-    if (error) console.log(error)
-    return products
-  }),
+  products: (_, { filter }) => {
+    let query = {}
+    if (filter && filter.name) query.name = { $regex: filter.name }
+    if (filter && filter.categoryId) query.categoryId = filter.categoryId
+
+    return Product.find(query, (error, products) => {
+      if (error) console.log(error)
+      return products
+    })
+  },
   product: (_, { id }) => Product.findById(id, (error, product) => {
     if (error) console.log(error)
     return product
   }),
-  categories: () => Category.find({}, (error, categories) => {
-    if (error) console.log(error)
-    return categories
-  }),
+  categories: (_, { filter }) => {
+    let query = {}
+    if (filter && filter.name) query.name = { $regex: filter.name }
+
+    return Category.find(query, (error, categories) => {
+      if (error) console.log(error)
+      return categories
+    })
+  },
   category: (_, { id }) => Category.findById(id, (error, category) => {
     if (error) console.log(error)
     return category
