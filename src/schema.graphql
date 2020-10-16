@@ -1,0 +1,25 @@
+type Category {
+  id: ID
+  name: String!
+  products: [Product]
+}
+
+type Product {
+  id: ID
+  name: String!
+  price: Float!
+  description: String
+  image: String
+  category: Category
+}
+
+type Query {
+  products: [Product]
+  product(id: ID!): Product
+  categories: [Category]
+  category(id: ID!): Category
+}
+type Mutation {
+  addProduct(name: String!, price: Float!, description: String, image: String, categoryId: String): Product
+  addCategory(name: String!): Category
+}
