@@ -1,6 +1,13 @@
 # graphql-apollo-server
 
-## Build Setup
+## Prereqs
+
+* Node
+* MongoDB
+
+Rename `.env.dev` to `.env`
+
+## Setup
 
 ```bash
 # install dependencies
