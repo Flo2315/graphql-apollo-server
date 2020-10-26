@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
   },
   description: String,
   image: String,
-  categoryId: String
+  categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }
 })
 
 const Product = mongoose.model('Product', schema)

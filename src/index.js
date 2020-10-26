@@ -23,8 +23,8 @@ const server = new ApolloServer({
   resolvers,
   introspection: true,
   playground: true,
-});
+})
 
 server.listen(PORT).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+  console.log(`🚀  Server ready at ${url}`)
+})
