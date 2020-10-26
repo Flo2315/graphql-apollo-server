@@ -1,6 +1,8 @@
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000
 
-const { ApolloServer } = require('apollo-server')
+const express = require('express')
+const { ApolloServer } = require('apollo-server-express')
+
 const mongoose = require('mongoose')
 const fs = require('fs')
 const path = require('path')
@@ -16,15 +18,20 @@ const resolvers = {
   Mutation,
   Category: CategoryResolver,
   Product: ProductResolver
-};
+}
 
-const server = new ApolloServer({ 
+const app = express()
+app.use('/public', express.static('public'))
+
+const server = new ApolloServer({
   typeDefs: fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf-8'),
   resolvers,
   introspection: true,
   playground: true,
 })
 
-server.listen(PORT).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`)
-})
+server.applyMiddleware({ app })
+
+app.listen({ port: PORT }, (url) =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+)

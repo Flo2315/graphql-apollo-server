@@ -1,4 +1,4 @@
-const { UserInputError } = require('apollo-server')
+const { UserInputError } = require('apollo-server-express')
 
 const { Product, validateProduct } = require('./models/Product')
 const { Category, validateCategory } = require('./models/Category')

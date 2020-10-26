@@ -2,15 +2,15 @@ const seeder = require('mongoose-seed')
 require('dotenv').config()
 const HOST_NAME = process.env.HOST_NAME || 'http://localhost:4000'
 
-seeder.connect(process.env.MONGODB_URL, function() {
+seeder.connect(process.env.MONGODB_URL, () => {
   seeder.loadModels([
     'src/models/Category.js',
     'src/models/Product.js'
-  ]);
+  ])
 
-  seeder.clearModels(['Category', 'Product'], function() {
-    seeder.populateModels(data, function() {
-      seeder.disconnect();
+  seeder.clearModels(['Category', 'Product'], () => {
+    seeder.populateModels(data, () => {
+      seeder.disconnect()
     })
 
   })
